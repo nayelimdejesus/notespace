@@ -10,7 +10,10 @@
     {{ form.as_p }}
     <button type="submit">Submit
     </button>
+<p>Have an account already? <a href="/login">Log in</a></p>
+
   </form>
+
   {% if form.errors %}
     <p style="color: red;">Invalid username or password</p>
   {% endif %}
