@@ -54,6 +54,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'notespace.urls'
+LOGIN_REDIRECT_URL = '/home/'
 
 TEMPLATES = [
     {
