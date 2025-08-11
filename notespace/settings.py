@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'journal',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'notespace.urls'
-LOGIN_REDIRECT_URL = '/home/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/journal/'
 
 TEMPLATES = [
     {

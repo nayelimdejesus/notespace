@@ -22,8 +22,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('login/', LoginView.as_view(template_name="journal/login.html"), name="login"),
-    path('', include('journal.urls')), 
-    path('home/', include('journal.urls')),
+    path('', include('accounts.urls')),
+    path('journal/', include('journal.urls'))
 
 ]

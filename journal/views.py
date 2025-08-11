@@ -6,37 +6,24 @@ from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 from django.contrib.auth.models import User
+from .models import Entry
+from .forms import EntryForm
+from django.views.generic import CreateView, ListView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.urls import reverse_lazy
 
-# Create your views here.
-def signup(request):
-    if request.method == 'POST':
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            user = form.save()
-            return redirect('login')
-    else:
-        form = UserCreationForm()
-
-    return render(request, 'journal/signup.html', {'form': form})
-
-def auth_login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')
-    else:
-        form = AuthenticationForm()
-    return render(request, 'journal/login.html', {'form': form})
-
-@login_required
-def auth_logout(request):
-    logout(request)
-    return redirect('login')
-        
-
-@login_required
-def home(request):
-    username = request.user.username
-    return render(request, 'journal/home.html', {'username': username})
+class JournalListView(LoginRequiredMixin, ListView):
+    model = Entry
+    template_name = 'journal/journal.html'
+    context_object_name = 'entries'
+    def get_queryset(self):
+        return Entry.objects.filter(user=self.request.user)
+class JournalCreateView(LoginRequiredMixin, CreateView):
+    model = Entry
+    success_url = reverse_lazy('journal')
+    form_class = EntryForm
+    template_name = 'journal/entry_form.html'
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)

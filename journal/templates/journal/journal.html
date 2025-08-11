@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home</title>
+    </head>
+    <body>
+        <h1>
+            Welcome Back {{user.username}}!
+        </h1>
+        <a href = "{% url 'logout' %}">Logout</a>
+        <a href="{% url 'new_entry' %}">New Entry</a>
+
+        {% if entries %}
+        <h3>Your Journal Entries</h3>
+            {% for entry in entries %}
+                <p>{{entry}}</p>
+            {% endfor %}
+        {% endif %}
+    </body>
+    <footer></footer>
+</html>
