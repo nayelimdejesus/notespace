@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Home</title>
-    </head>
-    <body>
-        <h1>
-            Welcome Back {{user.username}}!
-        </h1>
-        <a href = "{% url 'logout' %}">Logout</a>
-        <a href="{% url 'new_entry' %}">New Entry</a>
+{% extends 'base.html' %}
 
-        {% if entries %}
+{% block title %} Home {% endblock %}
+
+{% block content %} 
+    <h1>
+        Welcome Back {{user.username}}!
+    </h1>
+    <a href="{% url 'new_entry' %}">New Entry</a>
+
+    {% if entries %}
         <h3>Your Journal Entries</h3>
-            {% for entry in entries %}
-                <a href = "{% url 'view_entry' entry.id %}"><p>{{entry}}</p></a>
-            {% endfor %}
-        {% endif %}
-    </body>
-    <footer></footer>
-</html>
+        {% for entry in entries %}
+            <a href = "{% url 'view_entry' entry.id %}"><p>{{entry}}</p></a>
+        {% endfor %}
+    {% endif %}
+
+{% endblock %}

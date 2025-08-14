@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Create Account</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block title %} Create Account {% endblock %}
+
+
+{% block content %}
   <h2>Create an Account</h2>
   <form method="post">
     {% csrf_token %}
@@ -17,7 +17,4 @@
   {% if form.errors %}
     <p style="color: red;">Invalid username or password</p>
   {% endif %}
-</body>
-<footer>
-</footer>
-</html>
+{% endblock %}

@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>View Entry</title>
-    </head>
-    <body>
-        {% if entry %}
+{% extends 'base.html' %}
+
+{% block title %} View Entry {% endblock %}
+
+{% block content %} 
+    {% if entry %}
         <h1>
             {{entry.title}}
         </h1>
@@ -15,7 +14,5 @@
         <h1>
             No entries found.
         </h1>
-        {% endif %}
-    </body>
-    <footer></footer>
-</html>
+    {% endif %}
+{% endblock%}

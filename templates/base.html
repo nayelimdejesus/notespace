@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{% block title %} Home {% endblock %}</title>
+    </head>
+    <body>
+        <header>
+            <h1>NoteSpace</h1>
+            {% if user.is_authenticated %}
+            <ul>
+                <li><a href = "{% url 'journal' %}">Home</a></li>
+                <li><a href = "{% url 'logout' %}">Logout</a></li>
+            </ul>
+            {% else %}
+            <ul>
+                <li><a href = "{% url 'login' %}">Login</a></li>
+                <li><a href = "{% url 'signup' %}">Signup</a></li>
+            </ul>
+            {% endif %}
+        </header>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </body>
+    <footer></footer>
+</html>
