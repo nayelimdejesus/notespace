@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import redirect
 from django.contrib.auth.forms import AuthenticationForm
@@ -27,3 +27,10 @@ class JournalCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+@login_required
+def view_entry(request, id):
+    entry = get_object_or_404(Entry, id=id)
+    
+    return render(request, 'journal/view_entry.html', {'entry': entry})
+    

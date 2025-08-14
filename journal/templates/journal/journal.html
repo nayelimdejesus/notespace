@@ -13,7 +13,7 @@
         {% if entries %}
         <h3>Your Journal Entries</h3>
             {% for entry in entries %}
-                <p>{{entry}}</p>
+                <a href = "{% url 'view_entry' entry.id %}"><p>{{entry}}</p></a>
             {% endfor %}
         {% endif %}
     </body>
