@@ -28,5 +28,4 @@ def signup(request):
 
 @login_required
 def auth_logout(request):
-    logout(request)
-    return render(request, 'accounts/logout.html' ,{})
+    return redirect('login')

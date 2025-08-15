@@ -3,16 +3,22 @@
 {% block title %} View Entry {% endblock %}
 
 {% block content %} 
+<div class="w-96 mx-auto text-center mt-10">
     {% if entry %}
-        <h1>
+    <div class="bg-gray-100 min-h-64 p-10">
+        <div class="text-gray-400">
+            <p>Created on {{entry.created_at}}</p>
+            <p>Updated on {{entry.updated_at}}</p>
+        </div>
+        <h1 class="text-3xl my-5">
             {{entry.title}}
         </h1>
-        <p>Created on {{entry.created_at}}</p>
-        <p>Updated on {{entry.updated_at}}</p>
         <p>{{entry.content}}</p>
+    </div>
         {% else %}
         <h1>
             No entries found.
         </h1>
     {% endif %}
+</div>
 {% endblock%}
