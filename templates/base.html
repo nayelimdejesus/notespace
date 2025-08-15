@@ -1,21 +1,21 @@
+{% load static tailwind_tags %}
 <!DOCTYPE html>
 <html>
     <head>
         <title>{% block title %} Home {% endblock %}</title>
+        {% tailwind_css %}
+        
     </head>
     <body>
         <header>
-            <h1>NoteSpace</h1>
             {% if user.is_authenticated %}
-            <ul>
-                <li><a href = "{% url 'journal' %}">Home</a></li>
-                <li><a href = "{% url 'logout' %}">Logout</a></li>
-            </ul>
-            {% else %}
-            <ul>
-                <li><a href = "{% url 'login' %}">Login</a></li>
-                <li><a href = "{% url 'signup' %}">Signup</a></li>
-            </ul>
+            <nav class="bg-gray-900 p-4 text-white flex justify-between items-center">                
+                <a href="{% url 'journal' %}">NoteSpace</a>
+                <ul class="flex space-x-4">
+                    <li><a class = "bg-blue-500 text-white p-2" href = "{% url 'journal' %}">Home</a></li>
+                    <li><a class = "bg-blue-500 text-white p-2" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+            </nav>
             {% endif %}
         </header>
         <main>
