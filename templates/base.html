@@ -9,13 +9,21 @@
     <body>
         <header>
             {% if user.is_authenticated %}
-            <nav class="bg-gray-900 p-4 text-white flex justify-between items-center">                
-                <a href="{% url 'journal' %}">NoteSpace</a>
-                <ul class="flex space-x-4">
-                    <li><a class = "bg-blue-500 text-white p-2" href = "{% url 'journal' %}">Home</a></li>
-                    <li><a class = "bg-blue-500 text-white p-2" href="{% url 'logout' %}">Logout</a></li>
-                </ul>
-            </nav>
+                <nav class="bg-gray-900 p-4 text-white flex justify-between items-center">                
+                    <a href="{% url 'journal' %}">NoteSpace</a>
+                    <ul class="flex space-x-4">
+                        <li><a class = "bg-blue-500 text-white p-2" href = "{% url 'journal' %}">Home</a></li>
+                        <li><a class = "bg-blue-500 text-white p-2" href="{% url 'logout' %}">Logout</a></li>
+                    </ul>
+                </nav>
+            {% else %}
+                <nav class="bg-gray-900 p-4 text-white flex justify-between items-center">                
+                    <a href="{% url 'landing' %}">NoteSpace</a>
+                    <ul class="flex space-x-4">
+                        <li><a class = "bg-blue-500 text-white p-2" href = "{% url 'login' %}">Login</a></li>
+                        <li><a class = "bg-blue-500 text-white p-2" href="{% url 'signup' %}">Signup</a></li>
+                    </ul>
+                </nav>
             {% endif %}
         </header>
         <main>

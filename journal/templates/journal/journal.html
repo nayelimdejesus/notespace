@@ -4,19 +4,21 @@
 
 {% block content %} 
 <div class="w-96 mx-auto text-center mt-10">
-    <h1 class="text-3xl">
-        Welcome Back {{user.username}}!
-    </h1>
+    {% if user.is_authenticated %}
+        <h1 class="text-3xl">
+            Welcome Back {{user.username}}!
+        </h1>
 
-    <a class="inline-block bg-blue-500 px-2 py-1 m-4 text-white" href="{% url 'new_entry' %}">New Entry</a>
+        <a class="inline-block bg-blue-500 px-2 py-1 m-4 text-white" href="{% url 'new_entry' %}">New Entry</a>
 
-    {% if entries %}
-        <h3 class="text-2xl mb-2">Your Journal Entries</h3>
-        <ol class="text-left list-decimal list-inside space-y-1">
-        {% for entry in entries %}
-            <li><a class="hover:text-blue-600" href = "{% url 'view_entry' entry.id %}">{{entry}} - {{ entry.content|truncatewords:5 }}...</a></li>
-        {% endfor %}
-        </ol>
+        {% if entries %}
+            <h3 class="text-2xl mb-2">Your Journal Entries</h3>
+            <ol class="text-left list-decimal list-inside space-y-1">
+            {% for entry in entries %}
+                <li><a class="hover:text-blue-600" href = "{% url 'view_entry' entry.id %}">{{entry}} - {{ entry.content|truncatewords:5 }}...</a></li>
+            {% endfor %}
+            </ol>
+        {% endif %}
     {% endif %}
 </div>
 
