@@ -28,4 +28,5 @@ def signup(request):
 
 @login_required
 def auth_logout(request):
-    return redirect('login')
+    logout(request)
+    return redirect('/')
