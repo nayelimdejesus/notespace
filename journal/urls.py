@@ -1,10 +1,9 @@
 from django.urls import path
 from . import views
-from .views import JournalCreateView, JournalListView
+from .views import JournalCreateView, JournalListView, JournalUpdateView
 
 urlpatterns = [
     path('', JournalListView.as_view(), name='journal'),
     path('new/', JournalCreateView.as_view(), name ='new_entry'),
-    path('entry/<int:id>/', views.view_entry, name='view_entry')
-
-]
+    path('entry/<int:id>/', views.view_entry, name='view_entry'),
+    path("entry/<int:pk>/edit/", JournalUpdateView.as_view(), name="edit_entry"),]
