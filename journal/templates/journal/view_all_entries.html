@@ -1,12 +1,12 @@
 {% extends 'base.html' %}
 
-{% block title %} Home {% endblock %}
+{% block title %} Entries {% endblock %}
 
 {% block content %} 
 <div class="w-[80%] mx-auto text-center mt-10">
     {% if user.is_authenticated %}
         <h1 class="text-3xl">
-            Welcome Back {{user.username}}!
+            All Entries
         </h1>
 
         <a class="inline-block bg-blue-500 px-2 py-1 m-4 text-white" href="{% url 'new_entry' %}">New Entry</a>
@@ -21,7 +21,7 @@
                 </tr>
             </thead>
             <tbody>
-                {% for entry in entries|slice:":8" %}
+                {% for entry in entries %}
                 <tr>
                 <td class="border border-gray-300 px-4 py-2">
                     {{ entry.updated_at|date:"F j, Y" }}
@@ -36,7 +36,6 @@
                 {% endfor %}
             </tbody>
             </table>
-            <a href="{% url 'entries' %}" class="inline-block bg-blue-500 px-2 py-1 m-4 text-white">View All Entries</a>
         {% endif %}
     {% endif %}
 </div>

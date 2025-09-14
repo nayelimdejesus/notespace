@@ -17,7 +17,10 @@ class JournalListView(LoginRequiredMixin, ListView):
     template_name = 'journal/journal.html'
     context_object_name = 'entries'
     def get_queryset(self):
-        return Entry.objects.filter(user=self.request.user)
+        return Entry.objects.filter(user=self.request.user).order_by('-updated_at')
+class EntriesListView(JournalListView):
+    template_name = 'journal/view_all_entries.html'
+    
 class JournalCreateView(LoginRequiredMixin, CreateView):
     model = Entry
     success_url = reverse_lazy('journal')
