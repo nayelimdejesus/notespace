@@ -5,6 +5,10 @@ from .models import Entry
 class EntryForm(forms.ModelForm):
     class Meta:
         model = Entry
-        fields = ('title', 'content')
+        fields = ('title', 'content', 'mood')
+        widgets = {
+            'mood': forms.RadioSelect
+        }
+
         
     

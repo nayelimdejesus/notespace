@@ -15,6 +15,7 @@
             <table class="table-auto border-collapse border border-gray-300 w-full">
             <thead class="bg-gray-100">
                 <tr>
+                <th class="border border-gray-300 px-6 py-2 whitespace-nowrap">Mood</th>
                 <th class="border border-gray-300 px-6 py-2 whitespace-nowrap">Last Updated</th>
                 <th class="border border-gray-300 px-6 py-2 whitespace-nowrap">All Entries</th>
                 <th class="border border-gray-300 px-6 py-2 whitespace-nowrap">Preview</th>
@@ -23,6 +24,9 @@
             <tbody>
                 {% for entry in entries|slice:":8" %}
                 <tr>
+                <td class="border border-gray-300 px-4 py-2">
+                    {{entry.mood}}
+                </td>
                 <td class="border border-gray-300 px-4 py-2">
                     {{ entry.updated_at|date:"F j, Y" }}
                 </td>
