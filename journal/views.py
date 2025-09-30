@@ -11,6 +11,20 @@ from .forms import EntryForm
 from django.views.generic import CreateView, ListView, UpdateView 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
+MOOD_COLORS = {
+    'happy': '#FFD700',
+    'sad': '#1E90FF',
+    'angry': '#FF4500',
+    'anxious': '#8A2BE2',
+    'neutral': '#A9A9A9',
+    'excited': '#FF69B4',
+    'relaxed': '#32CD32',
+    'tired': '#808080',
+    'confused': '#FFA500',
+    'bored': '#C0C0C0',
+    'love': '#FF1493',
+    'in_love': '#FF69B4',
+}
 
 class JournalListView(LoginRequiredMixin, ListView):
     model = Entry
@@ -18,6 +32,10 @@ class JournalListView(LoginRequiredMixin, ListView):
     context_object_name = 'entries'
     def get_queryset(self):
         return Entry.objects.filter(user=self.request.user).order_by('-updated_at')
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['MOOD_COLORS'] = MOOD_COLORS
+        return context
 class EntriesListView(JournalListView):
     template_name = 'journal/view_all_entries.html'
     

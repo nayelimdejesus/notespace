@@ -5,12 +5,20 @@ from django.contrib.auth.models import User
 # Create your models here.
 class Entry(models.Model):
     MOOD_CHOICES = [
-        ('happy', 'Happy'),
-        ('sad', 'Sad'),
-        ('angry', 'Angry'),
-        ('anxious', 'Anxious'),
-        ('neutral', 'Neutral'),
-    ]
+    ('happy', 'Happy'),
+    ('sad', 'Sad'),
+    ('angry', 'Angry'),
+    ('anxious', 'Anxious'),
+    ('neutral', 'Neutral'),
+    ('excited', 'Excited'),
+    ('relaxed', 'Relaxed'),
+    ('tired', 'Tired'),
+    ('confused', 'Confused'),
+    ('bored', 'Bored'),
+    ('love', 'Love')
+]
+
+
     
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='entries')
     title = models.CharField(max_length=100)

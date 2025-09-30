@@ -3,6 +3,8 @@
 {% block title %} Home {% endblock %}
 
 {% block content %} 
+{% load mood_filters %}
+
 <div class="w-[80%] mx-auto text-center mt-10">
     {% if user.is_authenticated %}
         <h1 class="text-3xl">
@@ -23,10 +25,9 @@
             </thead>
             <tbody>
                 {% for entry in entries|slice:":8" %}
-                <tr>
-                <td class="border border-gray-300 px-4 py-2">
-                    {{entry.mood}}
-                </td>
+<tr style="background-color: {{ MOOD_COLORS|get_color:entry.mood }};">               <td class="border border-gray-300 px-4 py-2">
+            {{ entry.mood }}
+        </td>
                 <td class="border border-gray-300 px-4 py-2">
                     {{ entry.updated_at|date:"F j, Y" }}
                 </td>
