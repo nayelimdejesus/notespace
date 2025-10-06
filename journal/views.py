@@ -8,7 +8,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.models import User
 from .models import Entry
 from .forms import EntryForm
-from django.views.generic import CreateView, ListView, UpdateView 
+from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 MOOD_COLORS = {
@@ -48,6 +48,14 @@ class JournalCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
+    
+class JournalDeleteView(LoginRequiredMixin, DeleteView):
+    model = Entry
+    template_name = 'journal/entry_confirm_delete.html'
+    success_url = reverse_lazy('journal')
+    
+    def get_queryset(self):
+        return super().get_queryset().filter(user=self.request.user)
     
 class JournalUpdateView(LoginRequiredMixin, UpdateView):
     model = Entry

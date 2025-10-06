@@ -25,7 +25,7 @@
             </thead>
             <tbody>
                 {% for entry in entries|slice:":8" %}
-<tr style="background-color: {{ MOOD_COLORS|get_color:entry.mood }};">               <td class="border border-gray-300 px-4 py-2">
+<tr >               <td class="border border-gray-300 px-4 py-2" style="background-color: {{ MOOD_COLORS|get_color:entry.mood }};">
             {{ entry.mood }}
         </td>
                 <td class="border border-gray-300 px-4 py-2">
