@@ -1,13 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="max-w-xl mx-auto bg-white p-6 rounded-lg shadow">
-<h2>Are you sure you want to delete "{{ object.title }}"?</h2>
+<div class="w-[80%] mx-auto text-center mt-10 mb-4">
 
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Yes, delete</button>
-    <a href="{% url 'journal' %}">Cancel</a>
-</form>
+    <div class="bg-white border border-gray-300 rounded-xl shadow-md p-6 w-80 text-center mx-auto font-sans">
+        <h3 class="text-lg font-semibold mb-2">Are you sure you want to delete "{{ object.title }}"?</h3>
+        <p class="text-gray-600 mb-4">This action cannot be undone.</p>
+
+            <form method="post" class="flex justify-center gap-3">
+                {% csrf_token %}
+                <button class= "bg-red-500 text-white border rounded py-2 px-4" type="submit">Delete</button>
+                <a class="bg-gray-200 border rounded py-2 px-4" href="{% url 'journal' %}">Cancel</a>
+            </form>
+
+    </div>
+
+
 </div>
 {% endblock %}

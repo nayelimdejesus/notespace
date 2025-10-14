@@ -3,7 +3,8 @@
 {% block title %} Entries {% endblock %}
 
 {% block content %} 
-<div class="w-[80%] mx-auto text-center mt-10">
+{% load mood_filters %}
+<div class="w-[80%] mx-auto text-center mt-10 mb-4">
     {% if user.is_authenticated %}
         <h1 class="text-3xl">
             All Entries
@@ -22,16 +23,19 @@
             </thead>
             <tbody>
                 {% for entry in entries %}
-                <tr>
-                <td class="border border-gray-300 px-4 py-2">
-                    {{ entry.updated_at|date:"F j, Y" }}
-                </td>
-                <td class="border border-gray-300 px-4 py-2">
-                    <a class="hover:text-blue-600" href="{% url 'view_entry' entry.id %}">{{ entry }}</a>
-                </td>
-                <td class="border border-gray-300 px-4 py-2">
-                    {{ entry.content|truncatewords:5 }}...
-                </td>
+                <tr>               
+                    <td class="border border-gray-300 px-4 py-2" style="background-color: {{ MOOD_COLORS|get_color:entry.mood }};">
+                        {{ entry.mood }}
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        {{ entry.updated_at|date:"F j, Y" }}
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <a class="hover:text-blue-600" href="{% url 'view_entry' entry.id %}">{{ entry }}</a>
+                    </td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        {{ entry.content|truncatewords:5 }}...
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
