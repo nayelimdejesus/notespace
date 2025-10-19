@@ -17,7 +17,7 @@ MOOD_COLORS = {
     'angry': '#FF4500',
     'anxious': '#8A2BE2',
     'neutral': '#A9A9A9',
-    'excited': '#FF69B4',
+    'excited': "#1EFF9D",
     'relaxed': '#32CD32',
     'tired': '#808080',
     'confused': '#FFA500',
