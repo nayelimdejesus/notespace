@@ -44,6 +44,10 @@
             <a href="{% url 'entries' %}" class="inline-block bg-blue-500 px-2 py-1 m-4 text-white">View All Entries</a>
         {% endif %}
     {% endif %}
+    {% if mood_chart %}
+    <img src="{{ mood_chart }}" alt="Mood chart" />
+{% endif %}
+
 </div>
 
 {% endblock %}
