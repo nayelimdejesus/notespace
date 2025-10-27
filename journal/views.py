@@ -70,11 +70,20 @@ class JournalListView(LoginRequiredMixin, ListView):
         grid_colors = np.transpose(grid_colors, (1, 0, 2))
 
         fig, ax = plt.subplots(figsize=(16, 4))
-        # Plot
-        ax.imshow(grid_colors, aspect='auto')
+        ax.imshow(grid_colors, aspect='equal')  # keep perfect squares
+
+        # Draw visible grid lines manually (for all 53 weeks x 7 days)
+        for x in range(weeks + 1):
+            ax.axvline(x - 0.5, color='black', linewidth=0.4)
+        for y in range(days + 1):
+            ax.axhline(y - 0.5, color='black', linewidth=0.4)
+
+        # Remove ticks but keep grid visible
         ax.set_xticks([])
         ax.set_yticks([])
+
         plt.tight_layout()
+
 
  
         buf = io.BytesIO()
