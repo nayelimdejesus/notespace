@@ -14,6 +14,7 @@ from django.urls import reverse_lazy
 import matplotlib
 matplotlib.use('Agg') 
 import matplotlib.pyplot as plt
+import datetime, numpy as np, matplotlib.pyplot as plt, io, base64
 import numpy as np
 import io
 import base64
@@ -47,22 +48,25 @@ class JournalListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['MOOD_COLORS'] = MOOD_COLORS
         
-        entries = self.get_queryset().order_by('updated_at')
+        entries = self.get_queryset().order_by('created_at')
         
-        user_colors = []
+        mood_by_date = {}
         for entry in entries:
-            color = MOOD_COLORS.get(entry.mood, (1.0, 1.0, 1.0)) 
-            user_colors.append(color)
+            date = entry.created_at.date()
+            color = MOOD_COLORS.get(entry.mood, (1.0, 1.0, 1.0))
+            mood_by_date[date] = color
 
+        days = 7
+        weeks = 53  
+        today = datetime.date.today()
+        start_date = today - datetime.timedelta(weeks=weeks)
         grid_colors = []
         for week in range(weeks):
             week_colors = []
             for day in range(days):
-                idx = week * days + day
-                if idx < len(user_colors):
-                    week_colors.append(user_colors[idx]) 
-                else:
-                    week_colors.append((1.0, 1.0, 1.0)) 
+                date = start_date + datetime.timedelta(days=week * days + day)
+                color = mood_by_date.get(date, (1.0, 1.0, 1.0)) 
+                week_colors.append(color)
             grid_colors.append(week_colors)
 
         # Convert to 3D numpy array
